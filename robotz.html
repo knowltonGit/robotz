@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Word Ninja</title>
+    <!--<script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>-->
+    <script src="http://localhost:59117/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="include.js"></script>
+
+
+    <script type="text/javascript">
+
+        var _globalwordlist;
+        var _wordArray;
+
+        $(function () {
+
+
+            //CONSTANTS
+            var MIN_Y = 60;
+            var MAX_Y = 450;
+            var STARTING_X_MIN = 700;
+            var STARTING_X_MAX = 1500;
+            var MIN_STEP = 3;
+            var MAX_STEP = 4;
+            var canvas = document.getElementById("myCanvas");
+            var context = canvas.getContext("2d");
+
+            var i = 0;
+
+            //$('#word').spellAsYouType();
+
+
+
+            var data = "";
+
+            letArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+            'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+            function genRandomLetter() {
+                return letArray[genRandomNumber(0, 25)];
+            }
+
+
+            function genRandomNumber(start, end) {
+                return Math.floor((Math.random() * end) + start);
+            }
+
+            var one = {
+                visible: true,
+                x: genRandomNumber(STARTING_X_MIN, STARTING_X_MAX),
+                origX: genRandomNumber(STARTING_X_MIN, STARTING_X_MAX),
+                step: genRandomNumber(MIN_STEP, MAX_STEP),
+                y: genRandomNumber(MIN_Y, MAX_Y),
+                color: '#3B653D',
+                useletter: genRandomLetter()
+            };
+
+            var two = {
+                visible: true,
+                x: 1200,
+                origX: genRandomNumber(STARTING_X_MIN, STARTING_X_MAX),
+                step: genRandomNumber(MIN_STEP, MAX_STEP),
+                y: genRandomNumber(MIN_Y, MAX_Y),
+                color: '#3B653D',
+                useletter: genRandomLetter()
+            };
+
+            var three = {
+                visible: true,
+                x: genRandomNumber(STARTING_X_MIN, STARTING_X_MAX),
+                origX: genRandomNumber(STARTING_X_MIN, STARTING_X_MAX),
+                step: genRandomNumber(MIN_STEP, MAX_STEP),
+                y: genRandomNumber(MIN_Y, MAX_Y),
+                color: '#3B653D',
+                useletter: genRandomLetter()
+            };
+
+            var four = {
+                visible: true,
+                x: genRandomNumber(STARTING_X_MIN, STARTING_X_MAX),
+                origX: genRandomNumber(STARTING_X_MIN, STARTING_X_MAX),
+                step: genRandomNumber(MIN_STEP, MAX_STEP),
+                y: genRandomNumber(MIN_Y, MAX_Y),
+                color: '#3B653D',
+                useletter: genRandomLetter()
+            };
+
+            _myCircleArray = [one, two, three, four];
+
+            var currentBubble = null, mouse_x, mouse_y;
+
+            window.requestAnimFrame = (function (callback) {
+                return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+        function (callback) {
+            window.setTimeout(callback, 1000 / 60);
+        };
+            })();
+
+            
+            //function drawTextBubble(myCircle, context) {
+
+            //    //the circle
+            //    context.beginPath();
+            //    context.arc(myCircle.x, myCircle.y, 50, 0, Math.PI * 2, false);
+
+            //    if (context.isPointInPath(mouse_x, mouse_y)) {
+            //        currentBubble = myCircle;
+            //        console.log("current bubble got set in drawtextbubble");
+            //    }
+            //    context.fillStyle = currentBubble == myCircle ? '#F00' : '#3B653D';
+            //    context.fill();
+            //    context.strokeStyle = currentBubble == myCircle ? '#F00' : '#FFF';
+            //    context.stroke();
+
+            //    //the letter inside the circle
+            //    context.beginPath();
+            //    context.fillStyle = '#FFF';
+            //    context.fill();
+            //    context.font = "40px Grunge Handwriting";
+            //    context.fillText(myCircle.useletter, myCircle.x - 10, myCircle.y + 10);
+            //    context.strokeStyle = '#FFF';
+            //    context.stroke();
+            //}
+
+            function animate(canvas, context, startTime) {
+                var time = (new Date()).getTime() - startTime;
+                context.clearRect(0, 0, canvas.width, canvas.height); // only clear once
+
+                ////currentBubble = null;
+                ////for (var a = 0; a < _myCircleArray.length; a++) {
+                ////    var myCircle = _myCircleArray[a];
+                ////    if (myCircle.visible) {
+                ////        myCircle.x = myCircle.x - myCircle.step;
+
+                ////        if (myCircle.x < -50) {
+                ////            myCircle = randomizeCircle(myCircle);
+                ////        }
+
+                ////        drawTextBubble(myCircle, context);
+                ////    }
+                ////}
+                requestAnimFrame(function () {
+                    animate(canvas, context, startTime);
+                });
+            }
+
+            // wait one second before starting animation
+            setTimeout(function () {
+                var startTime = (new Date()).getTime();
+
+                canvas.onmousedown = function (e) {
+                    //e.preventDefault(e); // Optional
+                    mouseDownOrTouchStart(windowToCanvas(e.clientX, e.clientY));
+                };
+
+                canvas.onmousemove = function (e) {
+                    //e.preventDefault(e); // Optional
+                    var tempwtc = windowToCanvas(e.clientX, e.clientY);
+                    mouseMoveOrTouchMove(windowToCanvas(e.clientX, e.clientY));
+                };
+
+                canvas.ontouchstart = function (e) {
+                    e.preventDefault(e); // Optional
+                    mouseDownOrTouchStart(windowToCanvas(e.touches[0].pageX, e.touches[0].pageY));
+
+                    for (var i = 0; i < e.touches.length; ++i) {
+                        console.log('Touch at: ' + e.touches[i].pageX + ', ' + e.touches[i].pageY);
+                        $('#status').append('Touch at: ' + e.touches[i].pageX + ', ' + e.touches[i].pageY);
+                    }
+                };
+
+                canvas.ontouchmove = function (e) {
+                    e.preventDefault(e); // Optional
+                    mouseMoveOrTouchMove(windowToCanvas(e.pageX, e.pageX));
+                };
+
+                $('#addword').on("click", listhandler);
+                $('#togglebg').on("click", bgmusichandler);
+                animate(canvas, context, startTime);
+            }, 1000);
+
+            //function doSpellCheck(word) {
+
+            //    $.ajax({
+            //        type: "POST",
+            //        url: "http://localhost:7769/Home/CheckWord?strCheck=" + word,
+            //        data: "", // the data in form-encoded format, ie as it would appear on a querystring
+            //        //contentType: "application/x-www-form-urlencoded; charset=UTF-8", // if you are using form encoding, this is default so you don't need to supply it
+            //        dataType: "text", // the data type we want back, so text.  The data will come wrapped in xml
+            //        success: function (data) {
+            //            console.log(data);
+            //            //$("#searchresultsA").html(data); // show the string that was returned, this will be the data inside the xml wrapper
+            //        }
+            //    });
+            //}
+
+
+            //function listhandler() {
+            //    $('#wordlist').append($('#word').val() + ' <br />').focus();
+
+            //    //   $('#word').spellAsYouType();
+
+            //    //    doSpellCheck($('#word').val());
+
+            //    $('#word').val("");
+            //}
+
+
+            ///////////////// SOUND //////////////////////
+            function bgmusichandler() {
+
+                var running = $('#bgplayer')[0].paused;
+
+                if (!running) {
+                    $('#bgplayer')[0].pause();
+                }
+                else {
+                    $('#bgplayer')[0].play();
+                }
+            }
+
+            //function randomizeCircle(tempCircle) {
+            //    tempCircle.x = genRandomNumber(STARTING_X_MIN, STARTING_X_MAX);
+            //    tempCircle.origX = genRandomNumber(STARTING_X_MIN, STARTING_X_MAX);
+            //    tempCircle.step = genRandomNumber(MIN_STEP, MAX_STEP);
+            //    tempCircle.y = genRandomNumber(MIN_Y, MAX_Y);
+            //    tempCircle.useletter = genRandomLetter();
+            //    return tempCircle;
+            //}
+
+
+
+            function windowToCanvas(x, y) {
+                var bbox = canvas.getBoundingClientRect();
+
+                var tempx = x - bbox.left * (canvas.width / bbox.width);
+                var tempy = y - bbox.top * (canvas.height / bbox.height);
+
+                console.log("wtc x:  " + tempx);
+                console.log("wtc y:  " + tempy);
+
+                return {
+                    x: tempx,
+                    y: tempy
+                };
+            }
+
+
+            //            canvas.ontouchstart = function (e) {
+            //                e.preventDefault(e); // Optional
+            //                mouseDownOrTouchStart(windowToCanvas(e.pageX, e.pageY));
+            //            };
+
+            //            canvas.ontouchmove = function (e) {
+            //                e.preventDefault(e); // Optional
+            //                mouseMoveOrTouchMove(windowToCanvas(e.pageX, e.pageX));
+            //            };
+
+
+            //            canvas.ontouchend = function (e) {
+            //                e.preventDefault(e); // Optional
+            //                mouseUpOrTouchEnd(windowToCanvas(e.pageX, e.pageX));
+            //            };
+
+            // Mouse event handlers........................................
+
+            //                        canvas.onmousedown = function (e) {
+            //                            e.preventDefault(e); // Optional
+            //                            mouseDownOrTouchStart(windowToCanvas(e.clientX, e.clientY));
+            //                        };
+
+            //                        canvas.onmousemove = function (e) {
+            //                            e.preventDefault(e); // Optional
+            //                            mouseMoveOrTouchMove(windowToCanvas(e.clientX, e.clientY));
+            //                        };
+
+            //            canvas.onmouseup = function (e) {
+            //                e.preventDefault(e); // Optional
+            //                mouseUpOrTouchEnd(windowToCanvas(e.clientX, e.clientY));
+            //            };
+
+            // General functions...........................................
+
+            function mouseDownOrTouchStart(e) {
+
+
+                if (currentBubble != null) {
+
+                    $('#fxplayer')[0].play();
+
+                    $('#word').val($('#word').val() + currentBubble.useletter);
+                    currentBubble.visible = false;
+
+                    currentBubble = randomizeCircle(currentBubble);
+
+                    currentBubble.visible = true;
+                    $('#status').val("mouse down - bubble good (x,y) is (" + e.x + ", " + e.y + ")");
+                }
+                else {
+                    console.log("current bubble was null");
+
+                    $('#status').val("mouse down - bubble null (x,y) is (" + e.x + ", " + e.y + ")");
+
+                }
+                // IMPLEMENT
+            };
+
+            function mouseMoveOrTouchMove(e) {
+
+                var tempX = e.x;
+                var tempY = e.y;
+
+                console.log("offsetX: " + tempX);
+                console.log("offsetY: " + tempY);
+
+                mouse_x = tempX;
+                mouse_y = tempY;
+                // IMPLEMENT
+            };
+
+            //            function mouseUpOrTouchEnd(e) {
+            //                // IMPLEMENT
+            //            }
+
+
+        });
+
+    </script>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <audio id="bgplayer" autoplay style="display: none;">
+        <source src="bg.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="fxplayer" autoplay style="display: none;">
+        <source src="fx2.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <canvas id="canvas" height="640" width="640" style="background-color:grey;">canvas not supported</canvas>
+</body>
+</html>

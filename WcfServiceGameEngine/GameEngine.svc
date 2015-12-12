@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="WcfServiceGameEngine.GameEngine" CodeBehind="GameEngine.svc.cs" %>

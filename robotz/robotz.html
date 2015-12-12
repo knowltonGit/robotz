@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<meta charset="utf-8">
+
+<html>
+<head>
+    <title></title>
+    <link href="Styles/robotzcss.css" rel="stylesheet" />
+    <script src="Scripts/jquery-1.10.2.js"></script>
+
+    <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+
+
+    <!--<script src="Scripts/d3/d3.js"></script>-->
+    
+    <script src="Scripts/robotz/robotz_testanim.js"></script>
+    <script src="Scripts/robotz/robotz/robotz_generateEmptyGameBoard.js"></script>
+    <script src="Scripts/robotz/robotzjs.js"></script>
+</head>
+<body>
+    <canvas id="demoCanvas"></canvas>
+    <!-- original css animation idea taken from:  https://jsfiddle.net/simurai/CGmCe/ -->
+
+    <div id="gameboard" style="position:relative;float:left;height:680px;border:1px solid red;width:680px;">
+    </div>    
+    <div id="status"></div><br />
+    <input type="text" id="anotherstatus"></input>
+    <input type="button" id="testanim" value="test" />
+    <input type="button" id="testclearboard" value="test clear" />
+    <input type="button" id="testinitboard" value="test init" />
+    <input type="button" id="testbuildboardfrommemory" value="test build from mem" />
+
+    <input id="settempval" type="text" /><input type="button" id="settempv" value="set val" />
+    <input type="button" id="gettempv" value="get val" /><input id="gettempval" type="text" />
+</body>
+
+
+
+</html>

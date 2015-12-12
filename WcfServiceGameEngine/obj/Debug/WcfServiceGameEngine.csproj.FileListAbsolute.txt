@@ -1,0 +1,6 @@
+C:\robotz\WcfServiceGameEngine\bin\WcfServiceGameEngine.dll.config
+C:\robotz\WcfServiceGameEngine\bin\WcfServiceGameEngine.dll
+C:\robotz\WcfServiceGameEngine\bin\WcfServiceGameEngine.pdb
+C:\robotz\WcfServiceGameEngine\obj\Debug\WcfServiceGameEngine.csprojResolveAssemblyReference.cache
+C:\robotz\WcfServiceGameEngine\obj\Debug\WcfServiceGameEngine.dll
+C:\robotz\WcfServiceGameEngine\obj\Debug\WcfServiceGameEngine.pdb
