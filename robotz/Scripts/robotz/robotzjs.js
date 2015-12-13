@@ -373,34 +373,144 @@ $(document).ready(function () {
       console.log("done generating empty game board");
   }
 
- var stage = new createjs.Stage("demoCanvas");
+ //var stage = new createjs.Stage("demoCanvas");
 
-      var circle = new createjs.Shape();
+ //     var circle1 = new createjs.Shape();
+
+ //     var circle2 = new createjs.Shape();
+
+ // function init() {
+     
+ //     circle1.graphics.beginFill("red").drawCircle(0, 0, 50);
+ //     circle1.x = 100;
+ //     circle1.y = 100;
+
+ //     circle1.on("click", function () {
+ //         console.log("clicked circle 1");
+ //     });
+
+ //     circle2.graphics.beginFill("red").drawCircle(0, 0, 25);
+ //     circle2.x = 150;
+ //     circle2.y = 150;
+
+ //     circle2.on("click", function () {
+ //         console.log("clicked circle 2");
+ //     });
+
+ //     stage.addChild(circle1);
+ //     stage.addChild(circle2);
+ //     stage.update();
+ // }
+
+  //init();
+
+  //createjs.Ticker.addEventListener("tick", handleTick);
+
+  //function handleTick() {
+  //    //Circle will move 10 units to the right.
+  //    circle1.x += 10;
+
+  //    circle2.x += 10;
+  //    //Will cause the circle to wrap back
+  //    if (circle1.x > stage.canvas.width) { circle1.x = 0; }
+
+  //    if (circle2.x > stage.canvas.width) { circle2.x = 0; }
+
+  //    stage.update();
+  //}
+
+  //function init() {
+  //    var canvas = document.getElementById('demoCanvas')
+  //    var stage = new createjs.Stage(canvas);
+
+  //    canvas.width = window.innerWidth;
+
+  //    img = new Image();
+  //    img.src = 'http://static.guineashots.com/tutorials/easeljs/assets/bubbles.png';
+  //    img.onload = function (event) {
+
+  //        var data = {
+  //            framerate: 10,
+  //            images: [img],
+  //            frames: { width: 64, height: 64, regX: 32, regY: 32 },
+  //            animations: {
+  //                'explode': [0, 10],
+  //            }
+  //        }
+
+  //        var spritesheet = new createjs.SpriteSheet(data);
+  //        var animation = new createjs.Sprite(spritesheet, 'explode');
+  //        animation.x = canvas.width / 2;
+  //        animation.y = canvas.height / 2;
+
+  //        stage.addChild(animation);
+  //        var i = 0;
+
+  //        createjs.Ticker.addEventListener("tick", update);
+  //        function update(event) {
+             
+  //                animation.x = 50 + i;
+  //                animation.y = 40 + 1;
+  //                stage.update();
+
+  //                i++;
+
+  //                if (i > 300) {
+  //                    i = 0;
+  //                }
+  //        }
+  //    }
+  //}
+
+    //init();
+
+
+
 
   function init() {
-     
-      circle.graphics.beginFill("red").drawCircle(0, 0, 50);
-      circle.x = 100;
-      circle.y = 100;
+      var canvas = document.getElementById('demoCanvas')
+      var stage = new createjs.Stage(canvas);
 
-      circle.on("click", function () {
-          alert("clicked");
-      });
+      canvas.width = window.innerWidth;
 
-      stage.addChild(circle);
-      stage.update();
+      img = new Image();
+      img.src = 'http://static.guineashots.com/tutorials/easeljs/assets/bubbles.png';
+      img.onload = function (event) {
+
+          var data = {
+              framerate: 10,
+              images: [img],
+              frames: { width: 64, height: 64, regX: 32, regY: 32 },
+              animations: {
+                  'explode': [0, 10],
+              }
+          }
+
+          var spritesheet = new createjs.SpriteSheet(data);
+          var animation = new createjs.Sprite(spritesheet, 'explode');
+          animation.x = canvas.width / 2;
+          animation.y = canvas.height / 2;
+
+          stage.addChild(animation);
+          var i = 0;
+
+          createjs.Ticker.addEventListener("tick", update);
+          function update(event) {
+
+              animation.x = 50 + i;
+              animation.y = 40 + 1;
+              stage.update();
+
+              i++;
+
+              if (i > 300) {
+                  i = 0;
+              }
+          }
+      }
   }
 
   init();
 
-  createjs.Ticker.addEventListener("tick", handleTick);
-
-  function handleTick() {
-      //Circle will move 10 units to the right.
-      circle.x += 10;
-      //Will cause the circle to wrap back
-      if (circle.x > stage.canvas.width) { circle.x = 0; }
-      stage.update();
-  }
 
 });
