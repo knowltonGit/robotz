@@ -1,516 +1,231 @@
-﻿var movementPoints = 20;
-var whoseTurn = 1;
-
-var fromPieceID = "";
-var fromPieceName = "";
-var fromPieceColor = "";
-var fromPieceOwnerName = "";
-var fromPiecePlayerID = 0;
-var fromPieceHealth = 0;
-var fromPieceIsPlayerPiece = 0;
-
-var toPieceID = "";
-var toPieceName = "";
-var toPieceColor = "";
-var toPieceOwnerName = "";
-var toPiecePlayerID = 0;
-var toPieceHealth = 0;
-var toPieceIsPlayerPiece = 0;
-
-var tempPieceID = "";
-var tempPieceName = "";
-var tempPieceColor = "";
-var tempPieceOwnerName = "";
-var tempPiecePlayerID = 0;
-var tempPieceHealth = 0;
-var tempPieceIsPlayerPiece = 0;
-
+﻿var GameSquares = {};//create new object
+var player1 = "Bob";
+var player2 = "Tom";
+var playerturn = "";
+var movementpointsleft = 20;
+var gameover = false;
 var clickcount = 0;
+var firstsquareid = "";
+var secondsquareid = "";
+
+InitGamePiece(0, 0, "powersource", "200", "Red", player1, false, true, false, 0, 0, false);
+InitGamePiece(1, 0, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(2, 0, "medic", "100", "Red", player1, true, true, false, 0, 10, false);
+InitGamePiece(3, 0, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(4, 0, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(5, 0, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(6, 0, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(7, 0, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(8, 0, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(9, 0, "wall", "0", "", "none", true, false, false, 0, 0, false);
+InitGamePiece(0, 1, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(1, 1, "medic", "100", "Red", player1, true, true, false, 0, 10, false);
+InitGamePiece(2, 1, "destroyer", "100", "Red", player1, true, true, true, 10, 0, false);
+InitGamePiece(3, 1, "engineer", "100", "Red", player1,true, true, false, 0, 0, true);
+InitGamePiece(4, 1, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(5, 1, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(6, 1, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(7, 1, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(8, 1, "wall", "0", "", "none", true, false, false, 0, 0, false);
+InitGamePiece(9, 1, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(0, 2, "medic", "100", "Red", player1, true, true, false, 0, 10, false);
+InitGamePiece(1, 2, "destroyer", "100", "Red", player1, true, true, true, 10, 0, false);
+InitGamePiece(2, 2, "engineer", "100", "Red", player1, true, true, false, 0, 0, true);
+InitGamePiece(3, 2, "destroyer", "100", "Red", player1, true, true, true, 10, 0, false);
+InitGamePiece(4, 2, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(5, 2, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(6, 2, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(7, 2, "wall", "0", "", "none", true, false, false, 0, 0, false);
+InitGamePiece(8, 2, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(9, 2, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(0, 3, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(1, 3, "engineer", "100", "Red", player1, true, true, false, 0, 0, true);
+InitGamePiece(2, 3, "destroyer", "100", "Red", player1, true, true, true, 10, 0, false);
+InitGamePiece(3, 3, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(4, 3, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(5, 3, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(6, 3, "wall", "0", "", "none", true, false, false, 0, 0, false);
+InitGamePiece(7, 3, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(8, 3, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(9, 3, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(0, 4, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(1, 4, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(2, 4, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(3, 4, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(4, 4, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(5, 4, "wall", "0", "", "none", true, false, false, 0, 0, false);
+InitGamePiece(6, 4, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(7, 4, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(8, 4, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(9, 4, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(0, 5, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(1, 5, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(2, 5, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(3, 5, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(4, 5, "wall", "0", "", "none", true, false, false, 0, 0, false);
+InitGamePiece(5, 5, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(6, 5, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(7, 5, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(8, 5, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(9, 5, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(0, 6, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(1, 6, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(2, 6, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(3, 6, "wall", "0", "", "none", true, false, false, 0, 0, false);
+InitGamePiece(4, 6, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(5, 6, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(6, 6, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(7, 6, "destroyer", "100", "Blue", player2, true, true, true, 10, 0, false);
+InitGamePiece(8, 6, "engineer", "100", "Blue", player2, true, true, false, 0, 0, true);
+InitGamePiece(9, 6, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(0, 7, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(1, 7, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(2, 7, "wall", "0", "", "none", true, false, false, 0, 0, false);
+InitGamePiece(3, 7, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(4, 7, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(5, 7, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(6, 7, "destroyer", "100", "Blue", player2, true, true, true, 10, 0, false);
+InitGamePiece(7, 7, "engineer", "100", "Blue", player2, true, true, false, 0, 0, true);
+InitGamePiece(8, 7, "destroyer", "100", "Blue", player2, true, true, true, 10, 0, false);
+InitGamePiece(9, 7, "medic", "100", "Blue", player2, true, true, false, 0, 10, false);
+InitGamePiece(0, 8, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(1, 8, "wall", "0", "", "none", true, false, false, 0, 0, false);
+InitGamePiece(2, 8, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(3, 8, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(4, 8, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(5, 8, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(6, 8, "engineer", "100", "Blue", player2, true, true, false, 0, 0, true);
+InitGamePiece(7, 8, "destroyer", "100", "Blue", player2, true, true, true, 10, 0, false);
+InitGamePiece(8, 8, "medic", "100", "Blue", player2, true, true, false, 0, 10, false);
+InitGamePiece(9, 8, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(0, 9, "wall", "0", "", "none", true, false, false, 0, 0, false);
+InitGamePiece(1, 9, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(2, 9, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(3, 9, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(4, 9, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(5, 9, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(6, 9, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(7, 9, "medic", "100", "Blue", player2, true, true, false, 0, 10, false);
+InitGamePiece(8, 9, "empty", "0", "", "none", false, false, false, 0, 0, false);
+InitGamePiece(9, 9, "powersource", "200", "Blue", player2, false, false, false, 0, 0, false);
+
+function InitGamePiece(x, y, kind, health, color, owner, moveable, canbedamaged, candamageotherpieces, damagedonetootherpiecesperattack, healingperturn, canpushwalls) {
+    GameSquares["" + x + y + ""] = [kind,
+        health, //health
+        color, //color
+        owner, //owner
+        moveable, //moveable
+        canbedamaged, //can be damaged
+        candamageotherpieces, //can damage other pieces
+        damagedonetootherpiecesperattack, //damage done to other pieces per attack
+        healingperturn, //healing done to other pieces per turn
+        canpushwalls // can push walls
+    ];
+}
+
 
 $(document).ready(function () {
-   
 
-    function initGamePieces() {
-        defineGamePiece("00", "ps", "blue", 200, 1, "Tom", 1);
-        defineGamePiece("10", "empty", "", 0, 0, "", 0);
-        defineGamePiece("20", "med", "blue", 100, 1, "", 1);
-        defineGamePiece("30", "empty", "", 0, 0, "", 0);
-        defineGamePiece("40", "empty", "", 0, 0, "", 0);
-        defineGamePiece("50", "empty", "", 0, 0, "", 0);
-        defineGamePiece("60", "empty", "", 0, 0, "", 0);
-        defineGamePiece("70", "empty", "", 0, 0, "", 0);
-        defineGamePiece("80", "empty", "", 0, 0, "", 0);
-        defineGamePiece("90", "wall", "", 0, 0, "", 0);
-
-        defineGamePiece("01", "empty", "", 0, 0, "", 0);
-        defineGamePiece("11", "med", "blue", 100, 1, "Tom", 1);
-        defineGamePiece("21", "dest", "blue", 100, 1, "Tom", 1);
-        defineGamePiece("31", "eng", "blue", 100, 1, "Tom", 1);
-        defineGamePiece("41", "empty", "", 0, 0, "", 0);
-        defineGamePiece("51", "empty", "", 0, 0, "", 0);
-        defineGamePiece("61", "empty", "", 0, 0, "", 0);
-        defineGamePiece("71", "empty", "", 0, 0, "", 0);
-        defineGamePiece("81", "wall", "", 0, 0, "", 0);
-        defineGamePiece("91", "empty", "", 0, 0, "", 0);
-
-        defineGamePiece("02", "med", "blue", 100, 1, "Tom", 0);
-        defineGamePiece("12", "dest", "blue", 100, 1, "Tom", 1);
-        defineGamePiece("22", "eng", "blue", 100, 1, "Tom", 1);
-        defineGamePiece("32", "dest", "blue", 100, 1, "Tom", 1);
-        defineGamePiece("42", "empty", "", 0, 0, "", 0);
-        defineGamePiece("52", "empty", "", 0, 0, "", 0);
-        defineGamePiece("62", "empty", "", 0, 0, "", 0);
-        defineGamePiece("72", "wall", "", 0, 0, "", 0);
-        defineGamePiece("82", "empty", "", 0, 0, "", 0);
-        defineGamePiece("92", "empty", "", 0, 0, "", 0);
-
-        defineGamePiece("03", "empty", "", 0, 0, "", 0);
-        defineGamePiece("13", "eng", "blue", 100, 1, "Tom", 1);
-        defineGamePiece("23", "dest", "blue", 100, 1, "Tom", 1);
-        defineGamePiece("33", "empty", "", 0, 0, "", 0);
-        defineGamePiece("43", "empty", "", 0, 0, "", 0);
-        defineGamePiece("53", "empty", "", 0, 0, "", 0);
-        defineGamePiece("63", "wall", "", 0, 0, "", 0);
-        defineGamePiece("73", "empty", "", 0, 0, "", 0);
-        defineGamePiece("83", "empty", "", 0, 0, "", 0);
-        defineGamePiece("93", "empty", "", 0, 0, "", 0);
-
-        defineGamePiece("04", "empty", "", 0, 0, "", 0);
-        defineGamePiece("14", "empty", "", 0, 0, "", 0);
-        defineGamePiece("24", "empty", "", 0, 0, "", 0);
-        defineGamePiece("34", "empty", "", 0, 0, "", 0);
-        defineGamePiece("44", "empty", "", 0, 0, "", 0);
-        defineGamePiece("54", "wall", "", 0, 0, "", 0);
-        defineGamePiece("64", "empty", "", 0, 0, "", 0);
-        defineGamePiece("74", "empty", "", 0, 0, "", 0);
-        defineGamePiece("84", "empty", "", 0, 0, "", 0);
-        defineGamePiece("94", "empty", "", 0, 0, "", 0);
-
-        defineGamePiece("05", "empty", "", 0, 0, "", 0);
-        defineGamePiece("15", "empty", "", 0, 0, "", 0);
-        defineGamePiece("25", "empty", "", 0, 0, "", 0);
-        defineGamePiece("35", "empty", "", 0, 0, "", 0);
-        defineGamePiece("45", "wall", "", 0, 0, "", 0);
-        defineGamePiece("55", "empty", "", 0, 0, "", 0);
-        defineGamePiece("65", "empty", "", 0, 0, "", 0);
-        defineGamePiece("75", "empty", "", 0, 0, "", 0);
-        defineGamePiece("85", "empty", "", 0, 0, "", 0);
-        defineGamePiece("95", "empty", "", 0, 0, "", 0);
-
-        defineGamePiece("06", "empty", "", 0, 0, "", 0);
-        defineGamePiece("16", "empty", "", 0, 0, "", 0);
-        defineGamePiece("26", "empty", "", 0, 0, "", 0);
-        defineGamePiece("36", "wall", "", 0, 0, "", 0);
-        defineGamePiece("46", "empty", "", 0, 0, "", 0);
-        defineGamePiece("56", "empty", "", 0, 0, "", 0);
-        defineGamePiece("66", "empty", "", 0, 0, "", 0);
-        defineGamePiece("76", "dest", "red", 100, 2, "Bob", 1);
-        defineGamePiece("86", "eng", "red", 100, 2, "Bob", 1);
-        defineGamePiece("96", "empty", "", 0, 0, "", 0);
-
-        defineGamePiece("07", "empty", "", 0, 0, "", 0);
-        defineGamePiece("17", "empty", "", 0, 0, "", 0);
-        defineGamePiece("27", "wall", "", 0, 0, "", 0);
-        defineGamePiece("37", "empty", "", 0, 0, "", 0);
-        defineGamePiece("47", "empty", "", 0, 0, "", 0);
-        defineGamePiece("57", "empty", "", 0, 0, "", 0);
-        defineGamePiece("67", "dest", "red", 100, 2, "Bob", 1);
-        defineGamePiece("77", "eng", "red", 100, 2, "Bob", 1);
-        defineGamePiece("87", "dest", "red", 100, 2, "Bob", 1);
-        defineGamePiece("97", "med", "red", 100, 2, "Bob", 1);
-
-        defineGamePiece("08", "empty", "", 0, 0, "", 0);
-        defineGamePiece("18", "wall", "", 0, 0, "", 0);
-        defineGamePiece("28", "empty", "", 0, 0, "", 0);
-        defineGamePiece("38", "empty", "", 0, 0, "", 0);
-        defineGamePiece("48", "empty", "", 0, 0, "", 0);
-        defineGamePiece("58", "empty", "", 0, 0, "", 0);
-        defineGamePiece("68", "eng", "red", 100, 2, "Bob", 1);
-        defineGamePiece("78", "dest", "red", 100, 2, "Bob", 1);
-        defineGamePiece("88", "med", "red", 100, 2, "Bob", 1);
-        defineGamePiece("98", "empty", "", 0, 0, "", 0);
-
-        defineGamePiece("09", "wall", "", 0, 0, "", 0);
-        defineGamePiece("19", "empty", "", 0, 0, "", 0);
-        defineGamePiece("29", "empty", "", 0, 0, "", 0);
-        defineGamePiece("39", "empty", "", 0, 0, "", 0);
-        defineGamePiece("49", "empty", "", 0, 0, "", 0);
-        defineGamePiece("59", "empty", "", 0, 0, "", 0);
-        defineGamePiece("69", "empty", "", 0, 0, "", 0);
-        defineGamePiece("79", "med", "red", 100, 2, "Bob", 1);
-        defineGamePiece("89", "empty", "", 0, 0, "", 0);
-        defineGamePiece("99", "ps", "red", 200, 2, "Bob", 1);
-    }
-   
-
-    function robotzhandlemouseenter(id) {
-        $("#" + id).css("background-color", "red");
-        
-        tempPieceID = id;
-        tempPieceName = localStorage.getItem(tempPieceID + "-piecename");
-        tempPieceColor = localStorage.getItem(tempPieceID + "-Piececolor");
-        tempPieceOwnerName = localStorage.getItem(tempPieceID + "-playername");
-        tempPiecePlayerID = localStorage.getItem(tempPieceID + "-ownernumber");
-        tempPieceHealth = localStorage.getItem(tempPieceID + "-health");
-        tempPieceIsPlayerPiece = localStorage.getItem(tempPieceID + "-isplayerpiece");
-
-        $("#status").html("id:  " + tempPieceID +
-            "<br />piece name:  " + tempPieceName +
-            "<br />Piece color:  " + tempPieceColor +
-            "<br />owner id:  " + tempPieceOwnerName +
-            "<br />player id:  " + tempPiecePlayerID +
-            "<br />health:  " + tempPieceHealth +
-            "<br />is player piece:  " + tempPieceIsPlayerPiece
-            );
-    }
-
-    function robotzhandlemouseleave(id) {
-        $("#" + id).css("background-color", "white");
-    } 
-
-    function SetFrom(id) {
-        fromPieceID = id;
-        fromPieceName = localStorage.getItem(fromPieceID + "-piecename");
-        fromPieceColor = localStorage.getItem(fromPieceID + "-Piececolor");
-        fromPieceOwnerName = localStorage.getItem(fromPieceID + "-playername");
-        fromPiecePlayerID = localStorage.getItem(fromPieceID + "-ownernumber");
-        fromPieceHealth = localStorage.getItem(fromPieceID + "-health");
-        console.log("From piece:  " + fromPieceName);
-    }
-
-    function SetTo(id) {
-        toPieceID = id;
-        toPieceName = localStorage.getItem(toPieceID + "-piecename");
-        toPieceColor = localStorage.getItem(toPieceID + "-Piececolor");
-        toPieceOwnerName = localStorage.getItem(toPieceID + "-playername");
-        toPiecePlayerID = localStorage.getItem(toPieceID + "-ownernumber");
-        toPieceHealth = localStorage.getItem(toPieceID + "-health");
-        console.log("To piece:  " + toPieceName);
-    }
-
-    function HandleGamePieceAction(destinationPiece) {
-        if ($("#" + toPieceID).hasClass(destinationPiece)) {
-            $("#" + toPieceID).removeClass(destinationPiece);
-            $("#" + toPieceID).addClass(fromPieceName + fromPieceColor);
-
-            defineGamePiece(toPieceID, fromPieceName, fromPieceColor, fromPieceHealth, fromPiecePlayerID, fromPieceOwnerName, 1);
-            defineGamePiece(fromPieceID, toPieceName, toPieceColor, toPieceHealth, toPiecePlayerID, toPieceOwnerName, 0);
-
-            $("#" + fromPieceID).removeClass(fromPieceName + fromPieceColor);
-            $("#" + fromPieceID).addClass(destinationPiece);
-        }
-    }
-
-    function MoveValid(fromPiece,toPiece) {
-        var moveIsValid = 0;
-
-
-
-        return moveIsValid;
-    }
-
-
-  
-
-    
-
-    function defineGamePiece(xycoords, piecename, Piececolor, health, ownernumber, playername, isplayerpiece){
-        localStorage.setItem(xycoords + "-id", xycoords);  //refers to xy coords
-        localStorage.setItem(xycoords + "-piecename", piecename);  //ps, dest, med, eng, wall or empty
-        localStorage.setItem(xycoords + "-Piececolor", Piececolor);  //blue, red or none
-        localStorage.setItem(xycoords + "-health", health);  //from 0 to 100 (200 only for powersource), 0 means death for p, dest, eng or med  
-        localStorage.setItem(xycoords + "-ownernumber", ownernumber);  //1 or 2
-        localStorage.setItem(xycoords + "-playername", playername);
-        localStorage.setItem(xycoords + "-isplayerpiece", isplayerpiece);  //1 or 0        
-    }
-
-    function placeGamePiece(xycoords, classtoremove) {
-        $("#" + xycoords).removeClass(classtoremove);
-        $("#" + xycoords).addClass(localStorage.getItem(xycoords + "-piecename") + localStorage.getItem(xycoords + "-Piececolor"));
-    }
-
-    function generateGamePieces() {
-        for (y = 0; y < 10; y++) {
-            for (x = 0; x < 10; x++) {
-                placeGamePiece("" + x + y + "", "empty");
-            }
-        }        
-    }
-
-    function callAJAX(sometext) {
-        $.ajax({
-            type: 'GET',
-            url: 'Service1.svc/DoWork',
-            data: { newtext: sometext },
-            success: function (response) {
-                //$('div').html($(response).text());
-                console.log(response.d + " back at client");
-                var a = Date.now();
-                $("#anotherstatus").val(a + " " + response.d);
-            },
-            failure: function (response) {
-                //$('div').html($(response).text());
-                console.log(response.d + " ERROR");
-            }
-        });
-    }
-
+    genGameBoard();
  
+   
 
-
-    $("#testclearboard").click(function () {
-        generateEmptyGameBoard();
-    });
-
-    $("#testinitboard").click(function () {
-        initGamePieces();
-    });
-
-    $("#testbuildboardfrommemory").click(function () {
-        generateGamePieces();
-    });
-
-    $("#settempv").click(function () {
-        localStorage.setItem("temp", $("#settempval").val());
-    });
-
-    $("#gettempv").click(function () {
-        $("#gettempval").val(localStorage.getItem("temp"));
-    });
-
-    function sleep(milliseconds) {
-        var start = new Date().getTime();
-        for (var i = 0; i < 1e7; i++) {
-            if ((new Date().getTime() - start) > milliseconds) {
-                break;
+    function genGameBoard() {
+        var app = "";
+        for (y = 0; y < 10; y++) {
+            for (x = 0; x < 10; x++) {                
+                var t = "images/" + GameSquares["" + x + y + ""][0] + GameSquares["" + x + y + ""][2] + ".png";
+                app += "<div id='" + x + y + "' class='gamepiece'><canvas id='" + x + y + "' class='canvas' spritesrc='" + t + "' height='64px'></canvas></div>";               
             }
         }
-        console.log("done sleeping");
+
+        $("#gameboard").empty();
+        $("#gameboard").append(app);
+
+        console.log("done generating game board");
     }
-    // callAJAX("some sort of message");
+    
+    function init(canvas) {
+        canvas.height = 64;
+        canvas.width = 64;
 
+        var stage = new createjs.Stage(canvas);
 
-    console.log("ready!");
-  generateEmptyGameBoard();
-  initGamePieces();
-  generateGamePieces();
+       
 
+        var img = new Image();
 
-  $(".gamepiece").click(function () {
+        img.src = canvas.getAttributeNode("spritesrc").value
+        img.onload = function (event) {
+
+            var data = {
+                framerate: 50,
+                images: [img],
+                frames: { width: 64, height: 64, regX: 16, regY: 16 },
+                animations: {
+                    'explode': [0, 9],
+                }
+            }
+
+            var spritesheet = new createjs.SpriteSheet(data);
+            var animation = new createjs.Sprite(spritesheet, 'explode');
+            animation.x = 16;
+            animation.y = 16;
+
+            stage.addChild(animation);
+           
+            createjs.Ticker.addEventListener("tick", update);
+            function update(event) {
+                animation.x = 16;
+                animation.y = 16;
+                stage.update();             
+            }
+        }
+    }
+
+    function newinit() {
+        canvasArr = document.getElementsByClassName("canvas");
+
+        for (var a = 0; a < canvasArr.length; a++) {
+            init(canvasArr[a]);
+        }
+    }
+
+    newinit();
+
+    $("#dostuff").on("click", function () {
+        genGameBoard();
+        newinit();
+    });
+
+    $(".gamepiece").on("click", function () {
         clickcount++;
-        console.log("count:  " + clickcount);
+        var cursq = $(this).context.id;
+
         if (clickcount == 1) {
-            SetFrom($(this).context.id);           
+            firstsquareid = $(this).context.id;
         }
 
         if (clickcount == 2) {
-            SetTo($(this).context.id);            
-
-            if ($("#" + toPieceID).hasClass("empty")) {
-                $("#" + toPieceID).removeClass("empty");
-                $("#" + toPieceID).addClass(fromPieceName + fromPieceColor);
-
-                defineGamePiece(toPieceID, fromPieceName, fromPieceColor, fromPieceHealth, fromPiecePlayerID, fromPieceOwnerName, fromPieceIsPlayerPiece);
-                defineGamePiece(fromPieceID, toPieceName, toPieceColor, toPieceHealth, toPiecePlayerID, toPieceOwnerName, toPieceIsPlayerPiece);
-
-                $("#" + fromPieceID).removeClass(fromPieceName + fromPieceColor);
-                $("#" + fromPieceID).addClass("empty");
-            }
-
+            secondsquareid = $(this).context.id;
+            idcursquare.value = "from:  " + firstsquareid + " to:  " + secondsquareid;
             clickcount = 0;
-
-            fromPieceID = "";
-            fromPieceName = "";
-            fromPieceColor = "";
-
-            toPieceID = "";
-            toPieceName = "";
-            toPieceColor = "";
         }
-  });
-
-  $("#testanim").click(function () {
-      console.log("testing anim");
-
-      var timeoutID;
-
-      $("#84").removeClass("empty").addClass("medred");
-      timeoutID = window.setTimeout(hide84, 300);
-
-      function hide84() {
-          $("#84").removeClass("medred").addClass("empty");
-          $("#74").removeClass("empty").addClass("medred");
-          timeoutID = window.setTimeout(hide74, 100);
-      }
-
-      function hide74() {
-          $("#74").removeClass("medred").addClass("empty");
-          $("#64").removeClass("empty").addClass("medred");
-          timeoutID = window.setTimeout(hide64, 100);
-      }
-
-      function hide64() {
-          $("#64").removeClass("medred").addClass("empty");
-          $("#54").removeClass("wall").addClass("medred");
-      }
-
-      console.log("done generating testing animation");
-  });
 
 
-  function generateEmptyGameBoard() {
-      var app = "";
-      for (y = 0; y < 10; y++) {
-          for (x = 0; x < 10; x++) {
-              app += "<div id='" + x + y + "' class='gamepiece empty'></div>";
-          }
-      }
+        
+    });
 
+    $(".gamepiece").on("mouseover", function () {
+        //alert("mouseover");
+        //idcursquare.value = $(this).context.id;
 
-      $("#gameboard").empty();
-      $("#gameboard").append(app);
-
-      console.log("done generating empty game board");
-  }
-
- //var stage = new createjs.Stage("demoCanvas");
-
- //     var circle1 = new createjs.Shape();
-
- //     var circle2 = new createjs.Shape();
-
- // function init() {
-     
- //     circle1.graphics.beginFill("red").drawCircle(0, 0, 50);
- //     circle1.x = 100;
- //     circle1.y = 100;
-
- //     circle1.on("click", function () {
- //         console.log("clicked circle 1");
- //     });
-
- //     circle2.graphics.beginFill("red").drawCircle(0, 0, 25);
- //     circle2.x = 150;
- //     circle2.y = 150;
-
- //     circle2.on("click", function () {
- //         console.log("clicked circle 2");
- //     });
-
- //     stage.addChild(circle1);
- //     stage.addChild(circle2);
- //     stage.update();
- // }
-
-  //init();
-
-  //createjs.Ticker.addEventListener("tick", handleTick);
-
-  //function handleTick() {
-  //    //Circle will move 10 units to the right.
-  //    circle1.x += 10;
-
-  //    circle2.x += 10;
-  //    //Will cause the circle to wrap back
-  //    if (circle1.x > stage.canvas.width) { circle1.x = 0; }
-
-  //    if (circle2.x > stage.canvas.width) { circle2.x = 0; }
-
-  //    stage.update();
-  //}
-
-  //function init() {
-  //    var canvas = document.getElementById('demoCanvas')
-  //    var stage = new createjs.Stage(canvas);
-
-  //    canvas.width = window.innerWidth;
-
-  //    img = new Image();
-  //    img.src = 'http://static.guineashots.com/tutorials/easeljs/assets/bubbles.png';
-  //    img.onload = function (event) {
-
-  //        var data = {
-  //            framerate: 10,
-  //            images: [img],
-  //            frames: { width: 64, height: 64, regX: 32, regY: 32 },
-  //            animations: {
-  //                'explode': [0, 10],
-  //            }
-  //        }
-
-  //        var spritesheet = new createjs.SpriteSheet(data);
-  //        var animation = new createjs.Sprite(spritesheet, 'explode');
-  //        animation.x = canvas.width / 2;
-  //        animation.y = canvas.height / 2;
-
-  //        stage.addChild(animation);
-  //        var i = 0;
-
-  //        createjs.Ticker.addEventListener("tick", update);
-  //        function update(event) {
-             
-  //                animation.x = 50 + i;
-  //                animation.y = 40 + 1;
-  //                stage.update();
-
-  //                i++;
-
-  //                if (i > 300) {
-  //                    i = 0;
-  //                }
-  //        }
-  //    }
-  //}
-
-    //init();
-
-
-
-
-  function init() {
-      var canvas = document.getElementById('demoCanvas')
-      var stage = new createjs.Stage(canvas);
-
-      canvas.width = window.innerWidth;
-
-      img = new Image();
-      img.src = 'http://static.guineashots.com/tutorials/easeljs/assets/bubbles.png';
-      img.onload = function (event) {
-
-          var data = {
-              framerate: 10,
-              images: [img],
-              frames: { width: 64, height: 64, regX: 32, regY: 32 },
-              animations: {
-                  'explode': [0, 10],
-              }
-          }
-
-          var spritesheet = new createjs.SpriteSheet(data);
-          var animation = new createjs.Sprite(spritesheet, 'explode');
-          animation.x = canvas.width / 2;
-          animation.y = canvas.height / 2;
-
-          stage.addChild(animation);
-          var i = 0;
-
-          createjs.Ticker.addEventListener("tick", update);
-          function update(event) {
-
-              animation.x = 50 + i;
-              animation.y = 40 + 1;
-              stage.update();
-
-              i++;
-
-              if (i > 300) {
-                  i = 0;
-              }
-          }
-      }
-  }
-
-  init();
-
-
+        //$(this).context.
+        if (clickcount == 1) {
+            $(this).css("background-color", "blue");
+        }
+        
+    });
 });
+
+

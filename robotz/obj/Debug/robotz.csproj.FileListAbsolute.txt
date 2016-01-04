@@ -97,6 +97,6 @@ C:\git\robotz\robotz\bin\Microsoft.Owin.Security.Google.xml
 C:\git\robotz\robotz\bin\Microsoft.Owin.Security.Twitter.xml
 C:\git\robotz\robotz\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\git\robotz\robotz\bin\Microsoft.Owin.Security.OAuth.xml
-C:\git\robotz\robotz\obj\Debug\robotz.csprojResolveAssemblyReference.cache
 C:\git\robotz\robotz\obj\Debug\robotz.dll
 C:\git\robotz\robotz\obj\Debug\robotz.pdb
+C:\git\robotz\robotz\obj\Debug\robotz.csprojResolveAssemblyReference.cache
