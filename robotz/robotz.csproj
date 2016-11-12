@@ -20,6 +20,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -159,6 +160,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="gamepieceTemplate.html" />
     <Content Include="HtmlPage1.html" />
     <Content Include="images\coin-sprite-animation.png" />
     <Content Include="images\destroyerBlue.png" />
@@ -175,6 +177,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="images\spritesheet.png" />
     <Content Include="images\spritesheet2.png" />
+    <Content Include="Scripts\robotz\controllers.js" />
     <Content Include="Scripts\robotz\robotzjs.js" />
     <Content Include="Service1.svc" />
     <Content Include="Styles\robotzcss.css" />

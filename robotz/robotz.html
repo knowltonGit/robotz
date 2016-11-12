@@ -1,24 +1,56 @@
 ﻿<!DOCTYPE html>
 <meta charset="utf-8">
 
-<html>
+<html ng-app="myApp">
 <head>
-    <title></title>
+    <title>robotz</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+
+    <script src="Scripts/robotz/controllers.js"></script>
     <link href="Styles/robotzcss.css" rel="stylesheet" />
     <script src="Scripts/jquery-1.10.2.js"></script>
     <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
     <script src="Scripts/robotz/robotzjs.js"></script>
 </head>
 <body>
-    <div id="gameboard" style="position:relative;float:left;height:680px;border:1px solid red;width:680px;">
+    <!--<div ng-controller="ContactController">
+        {{gtr}}
+        <gamepiece2></gamepiece2>
+        <gamepiece2></gamepiece2>
+        <gamepiece2></gamepiece2>
+        <gamepiece2></gamepiece2>
+        <gamepiece2></gamepiece2>
+        <gamepiece2></gamepiece2>
+        <gamepiece2></gamepiece2>
+    </div>-->
+
+
+    <div id="player1" style="position:absolute;top:0px;left:0px;">Player1</div>
+    <div id="player2" style="position:absolute;top:700px;left:700px;">Player2</div>
+
+    <div id="gameboard" style="position:relative;float:left;height:680px;width:680px;">
     </div> 
     
     <input type="button" id="dostuff" value="do" name="do" />   
     <br /><br />
     
-    <textarea id="idcursquare" rows="4" cols="50">
-        
+    <input type="button" id="cleardebug" value="clear" name="clear" />
+    <br /><br />
+
+    <textarea id="idcursquare" rows="400" cols="50">
+       
     </textarea>
+
+    <div id="compass">
+        <div id="nw" class="compasssquare"></div><div id="n" class="compasssquare"></div><div id="ne" class="compasssquare"></div>
+        <div id="w" class="compasssquare"></div><div id="center" class="compasssquare"></div><div id="e" class="compasssquare"></div>
+        <div id="sw" class="compasssquare"></div><div id="s" class="compasssquare"></div><div id="se" class="compasssquare"></div>
+    </div>
+
+ 
+
+  
 </body>
 
 
